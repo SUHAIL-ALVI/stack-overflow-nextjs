@@ -6,33 +6,42 @@ import Link from "next/link";
 import React from "react";
 import HomeFilter from "@/components/home/HomeFilter";
 import NoResult from "@/components/shared/NoResult";
+import QuestionCard from "@/components/card/QuestionCard";
 
 const questions = [
   {
-    _id: 1,
-    title: "Casdcading delete in SQLAlchemy?",
+    _id: "1",
+    title: "Cascading delete in SQLAlchemy?",
     tags: [
-      { _id: 1, name: "python" },
-      { _id: 2, name: "sql" },
+      { _id: "1", name: "python" },
+      { _id: "2", name: "sql" },
     ],
-    author: "john doe",
-    upvotes: 2,
-    views: 10,
-    answer: 4,
-    createdAt: "2020-09-01T12:00.000Z",
+    author: {
+      _id: "1",
+      name: "John Doe",
+      picture: "https://randomuser.me/api/portraits/men/1.jpg",
+    },
+    upvotes: "2",
+    views: "10",
+    answer: [{}], // Adjust the object as needed
+    createdAt: new Date("2020-09-01T12:00:00.000Z"),
   },
   {
-    _id: 2,
-    title: "How ot center a div ?",
+    _id: "2",
+    title: "How to center a div?",
     tags: [
-      { _id: 1, name: "CSS" },
-      { _id: 2, name: "sql" },
+      { _id: "3", name: "CSS" },
+      { _id: "2", name: "sql" },
     ],
-    author: "Alvi ji",
-    upvotes: 2,
-    views: 10,
-    answer: 4,
-    createdAt: "2020-09-01T12:00.000Z",
+    author: {
+      _id: "2",
+      name: "Alvi Ji",
+      picture: "https://randomuser.me/api/portraits/men/2.jpg",
+    },
+    upvotes: "2",
+    views: "10",
+    answer: [{}], // Adjust the object as needed
+    createdAt: new Date("2020-09-01T12:00:00.000Z"),
   },
 ];
 
@@ -65,13 +74,25 @@ function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0
-          ? questions.map((question) => "QuestionCard")
+          ? questions.map((question) => (
+              <QuestionCard
+                key={question._id}
+                _id={question._id}
+                title={question.title}
+                tags={question.tags}
+                author={question.author}
+                upvotes={question.upvotes}
+                views={question.views}
+                answer={question.answer}
+                createdAt={question.createdAt}
+              />
+            ))
           : " No result Found"}
         <NoResult
           title=" There are no question to show"
           description=" Be the first to break the silence! 🚀 Ask a Question and kickstart the  discussion. our query could be the next big thing others learn from. Get  involved! 💡"
           link="/ask-question"
-          linkTitle="ask-Question"
+          linkTitle="ask-question"
         />
       </div>
     </>
